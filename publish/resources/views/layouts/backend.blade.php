@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>BACKEND {{ config('app.name', 'Laravel') }}</title>
+    <title>[BACKEND] {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -19,7 +19,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    BACKEND {{ config('app.name', 'Laravel') }}
+                    [BACKEND] {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -28,7 +28,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li><a href="{{ url('/admin') }}">Dashboard <span class="sr-only">(current)</span></a></li>
+                        {{--Something--}}
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -74,24 +74,21 @@
             @yield('content')
         </main>
 
-        <hr/>
-
-        <div class="container">
-            &copy; {{ date('Y') }}. Created by <a href="http://www.appzcoder.com">AppzCoder</a>
-            <br/>
-        </div>
-
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-
-    <script type="text/javascript">
-        $(function () {
-            // Navigation active
-            $('ul.navbar-nav a[href="{{ "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" }}"]').closest('li').addClass('active');
-        });
+    
+    <script>
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     </script>
+
+    {{--<script type="text/javascript">--}}
+        {{--$(function () {--}}
+            {{--// Navigation active--}}
+            {{--$('ul.navbar-nav a[href="{{ "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" }}"]').closest('li').addClass('active');--}}
+        {{--});--}}
+    {{--</script>--}}
 
     @yield('scripts')
 </body>

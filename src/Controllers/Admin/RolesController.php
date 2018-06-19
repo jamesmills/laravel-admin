@@ -3,8 +3,8 @@
 namespace JamesMills\LaravelAdmin\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use JamesMills\LaravelAdmin\Role;
-use JamesMills\LaravelAdmin\Permission;
+use JamesMills\LaravelAdmin\Models\Role;
+use JamesMills\LaravelAdmin\Models\Permission;
 use Illuminate\Http\Request;
 
 class RolesController extends Controller
@@ -20,7 +20,8 @@ class RolesController extends Controller
         $perPage = 15;
 
         if (!empty($keyword)) {
-            $roles = Role::where('name', 'LIKE', "%$keyword%")->orWhere('label', 'LIKE', "%$keyword%")
+            $roles = Role::where('name', 'LIKE', "%$keyword%")
+                ->orWhere('label', 'LIKE', "%$keyword%")
                 ->paginate($perPage);
         } else {
             $roles = Role::paginate($perPage);

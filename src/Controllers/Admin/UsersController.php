@@ -3,9 +3,9 @@
 namespace JamesMills\LaravelAdmin\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use JamesMills\LaravelAdmin\Role;
-use JamesMills\LaravelAdmin\User;
 use Illuminate\Http\Request;
+use JamesMills\LaravelAdmin\Models\Role;
+use App\User;
 
 class UsersController extends Controller
 {

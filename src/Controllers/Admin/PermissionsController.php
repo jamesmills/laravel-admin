@@ -3,7 +3,7 @@
 namespace JamesMills\LaravelAdmin\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use JamesMills\LaravelAdmin\Permission;
+use JamesMills\LaravelAdmin\Models\Permission;
 use Illuminate\Http\Request;
 
 class PermissionsController extends Controller

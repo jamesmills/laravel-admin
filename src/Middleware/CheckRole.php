@@ -1,6 +1,6 @@
 <?php
 
-namespace JamesMills\LaravelAdmin\Http\Middleware;
+namespace JamesMills\LaravelAdmin\Middleware;
 
 use Closure;
 
@@ -9,8 +9,8 @@ class CheckRole
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
      *
      * @return mixed
      */
@@ -18,18 +18,13 @@ class CheckRole
     {
         // Get the required roles from the route
         $roles = $this->getRequiredRoleForRoute($request->route());
-        // Check if a role is required for the route, and
-        // if so, ensure that the user has that role.
+
+        // Check if a role is required for the route, and if so, ensure that the user has that role.
         if ($request->user()->hasRole($roles) || !$roles) {
             return $next($request);
         }
 
-        return response([
-            'error' => [
-                'code' => 'INSUFFICIENT_ROLE',
-                'description' => 'You are not authorized to access this resource.',
-            ],
-        ], 401);
+        return redirect()->back()->with('flash_message', 'You are not authorized to access this resource.');
     }
 
     private function getRequiredRoleForRoute($route)

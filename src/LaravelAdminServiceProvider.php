@@ -4,6 +4,7 @@ namespace JamesMills\LaravelAdmin;
 
 use File;
 use Illuminate\Support\ServiceProvider;
+use JamesMills\LaravelAdmin\Middleware\CheckRole;
 
 class LaravelAdminServiceProvider extends ServiceProvider
 {
@@ -21,13 +22,19 @@ class LaravelAdminServiceProvider extends ServiceProvider
      */
     public function boot(\Illuminate\Routing\Router $router)
     {
-
-        echo __DIR__ . '/../database/migrations';
-
+        /*
+         * Will will leave the migration file in the package and load it via the Service Provider
+         */
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
-        $router->middleware('roles', __DIR__ . '/Middleware/CheckRole');
+        /*
+         * We will load the route middleware using the Service Provider as an alias
+         */
+        $router->aliasMiddleware('roles', CheckRole::class);
 
+        /*
+         * We will set some controllers and resources to publish to the original project codebase
+         */
         $this->publishes([
             __DIR__ . '/../publish/Controllers/' => app_path('Http/Controllers'),
             __DIR__ . '/../publish/resources/'   => base_path('resources'),
