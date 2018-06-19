@@ -1,6 +1,6 @@
 <?php
 
-namespace JamesMills\LaravelAdmin;
+namespace JamesMills\LaravelAdmin\Commands;
 
 use File;
 use Illuminate\Console\Command;
@@ -57,12 +57,17 @@ class LaravelAdminCommand extends Command
 
         $routes =
             <<<EOD
-Route::get('admin', 'Admin\\AdminController@index');
+/*
+|--------------------------------------------------------------------------
+| These routes were added by jamesmills/laravel-admin page
+|--------------------------------------------------------------------------
+*/
+Route::get('admin', 'Admin\AdminController@index')->name('admin');
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'roles'], 'roles' => 'admin'], function () {
-    Route::resource('admin/roles', '\\JamesMills\\LaravelAdmin\\Controllers\\Admin\\\RolesController');
-    Route::resource('admin/permissions', '\\JamesMills\\LaravelAdmin\\Controllers\\Admin\\PermissionsController');
-    Route::resource('admin/users', '\\\JamesMills\\LaravelAdmin\\Controllers\\Admin\\UsersController');
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'roles'], 'roles' => 'admin'], function () {
+    Route::resource('roles', '\JamesMills\LaravelAdmin\Controllers\Admin\RolesController');
+    Route::resource('permissions', '\JamesMills\LaravelAdmin\Controllers\Admin\PermissionsController');
+    Route::resource('users', '\JamesMills\LaravelAdmin\Controllers\Admin\UsersController');
 });
 
 EOD;
@@ -70,8 +75,18 @@ EOD;
         File::append($routeFile, "\n" . $routes);
 
         $this->info("Overriding the AuthServiceProvider");
-        $contents = File::get(__DIR__ . '/../publish/Providers/AuthServiceProvider.php');
+        $contents = File::get(__DIR__ . '/../../publish/Providers/AuthServiceProvider.php');
         File::put(app_path('Providers/AuthServiceProvider.php'), $contents);
+
+
+
+        // TODO
+        /*
+         * class User extends Authenticatable
+{
+    use Notifiable, HasRoles;
+         *
+         */
 
         $this->info("Successfully installed Laravel Admin!");
     }

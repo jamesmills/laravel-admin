@@ -22,9 +22,11 @@ class LaravelAdminServiceProvider extends ServiceProvider
     public function boot(\Illuminate\Routing\Router $router)
     {
 
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/');
+        echo __DIR__ . '/../database/migrations';
 
-        $router->middleware('checkRole', __DIR__ . '/../Middleware/CheckRole');
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+
+        $router->middleware('roles', __DIR__ . '/Middleware/CheckRole');
 
         $this->publishes([
             __DIR__ . '/../publish/Controllers/' => app_path('Http/Controllers'),
@@ -39,8 +41,6 @@ class LaravelAdminServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->commands(
-            'JamesMills\LaravelAdmin\Commands\LaravelAdminCommand'
-        );
+        $this->commands('\\JamesMills\\LaravelAdmin\\Commands\\LaravelAdminCommand');
     }
 }

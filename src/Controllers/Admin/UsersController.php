@@ -1,8 +1,8 @@
 <?php
 
-namespace JamesMills\LaravelAdmin\Http\Controllers\Admin;
+namespace JamesMills\LaravelAdmin\Controllers\Admin;
 
-use JamesMills\LaravelAdmin\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use JamesMills\LaravelAdmin\Role;
 use JamesMills\LaravelAdmin\User;
 use Illuminate\Http\Request;
