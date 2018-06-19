@@ -1,6 +1,6 @@
 <?php
 
-namespace Appzcoder\LaravelAdmin;
+namespace JamesMills\LaravelAdmin;
 
 use File;
 use Illuminate\Support\ServiceProvider;
@@ -21,41 +21,15 @@ class LaravelAdminServiceProvider extends ServiceProvider
      */
     public function boot(\Illuminate\Routing\Router $router)
     {
-        $this->publishes([
-            __DIR__ . '/../publish/Middleware/' => app_path('Http/Middleware'),
-        ]);
 
-        $this->publishes([
-            __DIR__ . '/../publish/migrations/' => database_path('migrations'),
-        ]);
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/');
 
-        $this->publishes([
-            __DIR__ . '/../publish/Model/' => app_path(),
-        ]);
+        $router->middleware('checkRole', __DIR__ . '/../Middleware/CheckRole');
 
         $this->publishes([
             __DIR__ . '/../publish/Controllers/' => app_path('Http/Controllers'),
+            __DIR__ . '/../publish/resources/'   => base_path('resources'),
         ]);
-
-        $this->publishes([
-            __DIR__ . '/../publish/resources/' => base_path('resources'),
-        ]);
-
-        $this->publishes([
-            __DIR__ . '/../publish/crudgenerator.php' => config_path('crudgenerator.php'),
-        ]);
-
-        $this->publishes([
-            __DIR__ . '/views' => base_path('resources/views/vendor/laravel-admin'),
-        ], 'views');
-
-        $this->loadViewsFrom(__DIR__ . '/views', 'laravel-admin');
-
-        $menus = [];
-        if (File::exists(base_path('resources/laravel-admin/menus.json'))) {
-            $menus = json_decode(File::get(base_path('resources/laravel-admin/menus.json')));
-            view()->share('laravelAdminMenus', $menus);
-        }
     }
 
     /**
@@ -66,7 +40,7 @@ class LaravelAdminServiceProvider extends ServiceProvider
     public function register()
     {
         $this->commands(
-            'Appzcoder\LaravelAdmin\LaravelAdminCommand'
+            'JamesMills\LaravelAdmin\Commands\LaravelAdminCommand'
         );
     }
 }

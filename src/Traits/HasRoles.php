@@ -1,6 +1,9 @@
 <?php
 
-namespace App;
+namespace JamesMills\LaravelAdmin\Models\Traits;
+
+use JamesMills\LaravelAdmin\Models\Permission;
+use JamesMills\LaravelAdmin\Models\Role;
 
 trait HasRoles
 {

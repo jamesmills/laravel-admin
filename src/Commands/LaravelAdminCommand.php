@@ -1,6 +1,6 @@
 <?php
 
-namespace Appzcoder\LaravelAdmin;
+namespace JamesMills\LaravelAdmin;
 
 use File;
 use Illuminate\Console\Command;
@@ -39,21 +39,12 @@ class LaravelAdminCommand extends Command
      */
     public function handle()
     {
-        try {
-            $this->call('migrate');
-        } catch (\Illuminate\Database\QueryException $e) {
-            $this->error($e->getMessage());
-            exit();
-        }
 
-        if (\App::VERSION() >= '5.2') {
-            $this->info("Generating the authentication scaffolding");
-            $this->call('make:auth');
-        }
+        $this->info("Generating the authentication scaffolding");
+        $this->call('make:auth');
 
         $this->info("Publishing the assets");
-        $this->call('vendor:publish', ['--provider' => 'Appzcoder\CrudGenerator\CrudGeneratorServiceProvider', '--force' => true]);
-        $this->call('vendor:publish', ['--provider' => 'Appzcoder\LaravelAdmin\LaravelAdminServiceProvider', '--force' => true]);
+        $this->call('vendor:publish', ['--provider' => 'JamesMills\LaravelAdmin\LaravelAdminServiceProvider', '--force' => true]);
 
         $this->info("Dumping the composer autoload");
         (new Process('composer dump-autoload'))->run();
@@ -62,20 +53,18 @@ class LaravelAdminCommand extends Command
         $this->call('migrate');
 
         $this->info("Adding the routes");
-
-        $routeFile = app_path('Http/routes.php');
-        if (\App::VERSION() >= '5.3') {
-            $routeFile = base_path('routes/web.php');
-        }
+        $routeFile = base_path('routes/web.php');
 
         $routes =
             <<<EOD
 Route::get('admin', 'Admin\\AdminController@index');
-Route::resource('admin/roles', 'Admin\\RolesController');
-Route::resource('admin/permissions', 'Admin\\PermissionsController');
-Route::resource('admin/users', 'Admin\\UsersController');
-Route::get('admin/generator', ['uses' => '\Appzcoder\LaravelAdmin\Controllers\ProcessController@getGenerator']);
-Route::post('admin/generator', ['uses' => '\Appzcoder\LaravelAdmin\Controllers\ProcessController@postGenerator']);
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'roles'], 'roles' => 'admin'], function () {
+    Route::resource('admin/roles', '\\JamesMills\\LaravelAdmin\\Controllers\\Admin\\\RolesController');
+    Route::resource('admin/permissions', '\\JamesMills\\LaravelAdmin\\Controllers\\Admin\\PermissionsController');
+    Route::resource('admin/users', '\\\JamesMills\\LaravelAdmin\\Controllers\\Admin\\UsersController');
+});
+
 EOD;
 
         File::append($routeFile, "\n" . $routes);

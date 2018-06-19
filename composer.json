@@ -1,14 +1,19 @@
 {
-    "name": "appzcoder/laravel-admin",
+    "name": "jamesmills/laravel-admin",
     "license": "MIT",
-    "description": "Laravel Admin Panel",
+    "description": "Laravel Admin",
     "keywords": [
         "laravel",
         "admin",
         "laravel admin",
-        "laravel admin panel"
+        "laravel roles",
+        "laravel permissions"
     ],
     "authors": [
+        {
+            "name": "James Mills",
+            "email": "james@clicksco.com",
+        },
         {
             "name": "Sohel Amin",
             "email": "sohelamincse@gmail.com",
@@ -18,18 +23,17 @@
     "require": {
         "php": ">=5.5.9",
         "illuminate/support": "^5.1",
-        "appzcoder/crud-generator": "^3.0",
         "laravelcollective/html": "~5.1"
     },
     "autoload": {
         "psr-4": {
-            "Appzcoder\\LaravelAdmin\\": "src/"
+            "JamesMills\\LaravelAdmin\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Appzcoder\\LaravelAdmin\\LaravelAdminServiceProvider"
+                "JamesMills\\LaravelAdmin\\LaravelAdminServiceProvider"
             ]
         }
     }

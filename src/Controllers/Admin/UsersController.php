@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace JamesMills\LaravelAdmin\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Role;
-use App\User;
+use JamesMills\LaravelAdmin\Http\Controllers\Controller;
+use JamesMills\LaravelAdmin\Role;
+use JamesMills\LaravelAdmin\User;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
