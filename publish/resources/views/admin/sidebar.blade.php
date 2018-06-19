@@ -15,12 +15,6 @@
 
     <br/>
 
-    @if (auth()->check() && auth()->user()->hasRole('admin'))
-        YOU ARE ADMIN
-    @endif
-
-    <br/>
-
     <div class="card">
         <div class="card-header">
             Users

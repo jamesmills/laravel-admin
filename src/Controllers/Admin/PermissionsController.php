@@ -99,7 +99,9 @@ class PermissionsController extends Controller
         $permission = Permission::findOrFail($id);
         $permission->update($request->all());
 
-        return redirect('admin/permissions')->with('flash_message', 'Permission updated!');
+        flash('Permission updated!.');
+
+        return redirect('admin/permissions');
     }
 
     /**
@@ -113,6 +115,8 @@ class PermissionsController extends Controller
     {
         Permission::destroy($id);
 
-        return redirect('admin/permissions')->with('flash_message', 'Permission deleted!');
+        flash('Permission deleted');
+
+        return redirect('admin/permissions');
     }
 }

@@ -52,6 +52,9 @@ class LaravelAdminCommand extends Command
         $this->info("Migrating the database tables into your application");
         $this->call('migrate');
 
+        $this->info("Seed the users table with an admin user (admin@domain.com / p455word)");
+        $this->call('db:seed', ['--class' => 'JamesMills\\LaravelAdmin\\Database\\Seeds\\DatabaseSeeder']);
+
         $this->info("Adding the routes");
         $routeFile = base_path('routes/web.php');
 
@@ -62,9 +65,8 @@ class LaravelAdminCommand extends Command
 | These routes were added by jamesmills/laravel-admin page
 |--------------------------------------------------------------------------
 */
-Route::get('admin', 'Admin\AdminController@index')->name('admin');
-
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'roles'], 'roles' => 'admin'], function () {
+    Route::get('admin', 'Admin\AdminController@index')->name('admin');
     Route::resource('roles', '\JamesMills\LaravelAdmin\Controllers\Admin\RolesController');
     Route::resource('permissions', '\JamesMills\LaravelAdmin\Controllers\Admin\PermissionsController');
     Route::resource('users', '\JamesMills\LaravelAdmin\Controllers\Admin\UsersController');

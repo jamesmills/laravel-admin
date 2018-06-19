@@ -23,7 +23,9 @@
     },
     "autoload": {
         "psr-4": {
-            "JamesMills\\LaravelAdmin\\": "src/"
+            "JamesMills\\LaravelAdmin\\": "src/",
+            "JamesMills\\LaravelAdmin\\Database\\Seeds\\": "database/seeds/"
+
         }
     },
     "extra": {
