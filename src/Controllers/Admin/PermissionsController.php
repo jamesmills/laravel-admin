@@ -51,7 +51,9 @@ class PermissionsController extends Controller
 
         Permission::create($request->all());
 
-        return redirect('admin/permissions')->with('flash_message', 'Permission added!');
+        flash('Permission added!');
+
+        return redirect('admin/permissions');
     }
 
     /**

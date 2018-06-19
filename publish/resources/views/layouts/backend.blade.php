@@ -62,16 +62,13 @@
         </nav>
 
         <main class="py-4">
-            @if (Session::has('flash_message'))
-                <div class="container">
-                    <div class="alert alert-success">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        {{ Session::get('flash_message') }}
-                    </div>
-                </div>
-            @endif
+
+            <div class="container">
+                @include('flash::message')
+            </div>
 
             @yield('content')
+
         </main>
 
     </div>
