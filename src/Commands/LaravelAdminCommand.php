@@ -66,7 +66,7 @@ class LaravelAdminCommand extends Command
 |--------------------------------------------------------------------------
 */
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'roles'], 'roles' => 'admin'], function () {
-    Route::get('admin', 'Admin\AdminController@index')->name('admin');
+    Route::get('/', 'Admin\AdminController@index')->name('dashboard');
     Route::resource('roles', '\JamesMills\LaravelAdmin\Controllers\Admin\RolesController');
     Route::resource('permissions', '\JamesMills\LaravelAdmin\Controllers\Admin\PermissionsController');
     Route::resource('users', '\JamesMills\LaravelAdmin\Controllers\Admin\UsersController');

@@ -41,7 +41,7 @@ trait HasRoles
     public function hasRole($role)
     {
         if (is_string($role)) {
-            return $this->roles->contains('name', $role);
+            return $this->roles->contains('label', $role);
         }
 
         if (is_array($role)) {
