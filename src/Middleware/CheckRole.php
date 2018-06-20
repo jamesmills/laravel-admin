@@ -26,7 +26,7 @@ class CheckRole
 
         flash('You are not authorized to access this resource.')->error();
 
-        return redirect()->back();
+        return redirect()->route('home');
     }
 
     private function getRequiredRoleForRoute($route)
