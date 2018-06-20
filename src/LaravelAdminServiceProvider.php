@@ -36,7 +36,7 @@ class LaravelAdminServiceProvider extends ServiceProvider
          * We will set some controllers and resources to publish to the original project codebase
          */
         $this->publishes([
-            __DIR__ . '/../publish/Controllers/' => app_path('Http/Controllers'),
+            __DIR__ . '/../publish/Http/Controllers/' => app_path('Http/Controllers'),
             __DIR__ . '/../publish/resources/'   => base_path('resources'),
         ]);
     }
