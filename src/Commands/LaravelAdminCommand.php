@@ -2,6 +2,7 @@
 
 namespace JamesMills\LaravelAdmin\Commands;
 
+use App\User;
 use File;
 use Illuminate\Console\Command;
 use Symfony\Component\Process\Process;
@@ -52,17 +53,12 @@ class LaravelAdminCommand extends Command
         $this->info("Migrating the database tables into your application");
         $this->call('migrate');
 
-        $this->info("Seed the users table with an admin user (admin@domain.com / p455word)");
-        $this->call('db:seed', ['--class' => 'JamesMills\\LaravelAdmin\\Database\\Seeds\\DatabaseSeeder']);
-
-
-        // TODO
-        /*
-         * class User extends Authenticatable
-{
-    use Notifiable, HasRoles;
-         *
-         */
+        if ($user = User::whereEmail('admin@domain.com')->first()) {
+            $this->info("Admin user already exists (admin@domain.com / p455word)");
+        } else {
+            $this->info("Seed the users table with an admin user (admin@domain.com / p455word)");
+            $this->call('db:seed', ['--class' => 'JamesMills\\LaravelAdmin\\Database\\Seeds\\DatabaseSeeder']);
+        }
 
         $this->info("Successfully installed Laravel Admin!");
     }

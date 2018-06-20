@@ -40,6 +40,7 @@ class LaravelAdminServiceProvider extends ServiceProvider
             __DIR__ . '/../publish/Providers/' => app_path('Providers'),
             __DIR__ . '/../publish/resources/'   => base_path('resources'),
             __DIR__ . '/../publish/routes/'   => base_path('routes'),
+            __DIR__ . '/../publish/Models/'   => app_path(),
         ]);
     }
 
