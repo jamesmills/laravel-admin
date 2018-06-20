@@ -55,26 +55,9 @@ class LaravelAdminCommand extends Command
         $this->info("Seed the users table with an admin user (admin@domain.com / p455word)");
         $this->call('db:seed', ['--class' => 'JamesMills\\LaravelAdmin\\Database\\Seeds\\DatabaseSeeder']);
 
-        $this->info("Adding the routes");
-        $routeFile = base_path('routes/web.php');
-
-        $routes =
-            <<<EOD
-/*
-|--------------------------------------------------------------------------
-| These routes were added by jamesmills/laravel-admin page
-|--------------------------------------------------------------------------
-*/
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'roles'], 'roles' => 'admin'], function () {
-    Route::get('/', 'Admin\AdminController@index')->name('dashboard');
-    Route::resource('roles', '\JamesMills\LaravelAdmin\Controllers\Admin\RolesController');
-    Route::resource('permissions', '\JamesMills\LaravelAdmin\Controllers\Admin\PermissionsController');
-    Route::resource('users', '\JamesMills\LaravelAdmin\Controllers\Admin\UsersController');
-});
-
-EOD;
-
-        File::append($routeFile, "\n" . $routes);
+        $this->info("Overriding the web routes");
+        $contents = File::get(__DIR__ . '/../../publish/routes/web.php');
+        File::put(app_path('../routes/web.php'), $contents);
 
         $this->info("Overriding the AuthServiceProvider");
         $contents = File::get(__DIR__ . '/../../publish/Providers/AuthServiceProvider.php');
