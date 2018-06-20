@@ -21,16 +21,6 @@ You will get a default user who has the role of admin. You will be able to log i
     ```
     php artisan laravel-admin:install
     ```
-3. Make sure your user model's has a ```HasRoles``` trait **app/User.php**.
-    ```php
-    use JamesMills\LaravelAdmin\Models\Traits\HasRoles;
- 
-    class User extends Authenticatable
-    {
-        use Notifiable, HasRoles;
-
-        ...
-    ```
 
 ## What this packages does
 
@@ -46,6 +36,7 @@ You will get a default user who has the role of admin. You will be able to log i
   - A dedicated backend template `resources/views/templates/backend.blade.php`
 - Replace the [AuthServiceProvider](https://github.com/jamesmills/laravel-admin/blob/master/publish/Providers/AuthServiceProvider.php) class with a new version
 - Replace the web routes file with a [new version](https://github.com/jamesmills/laravel-admin/blob/master/publish/routes/web.php)
+- Replaces the `User` model with a [new version](https://github.com/jamesmills/laravel-admin/blob/master/publish/Models/User.php) so that it has the `HasRoles` trail reference
 
 ## Roles & Permissions
 
