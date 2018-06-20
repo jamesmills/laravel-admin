@@ -55,15 +55,6 @@ class LaravelAdminCommand extends Command
         $this->info("Seed the users table with an admin user (admin@domain.com / p455word)");
         $this->call('db:seed', ['--class' => 'JamesMills\\LaravelAdmin\\Database\\Seeds\\DatabaseSeeder']);
 
-        $this->info("Overriding the web routes");
-        $contents = File::get(__DIR__ . '/../../publish/routes/web.php');
-        File::put(app_path('../routes/web.php'), $contents);
-
-        $this->info("Overriding the AuthServiceProvider");
-        $contents = File::get(__DIR__ . '/../../publish/Providers/AuthServiceProvider.php');
-        File::put(app_path('Providers/AuthServiceProvider.php'), $contents);
-
-
 
         // TODO
         /*
