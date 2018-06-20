@@ -28,36 +28,47 @@ The origin of this package is a fork from [appzcoder/laravel-admin](https://gith
         ...
     ```
 
-## Usage
+## What this packages does
+
+- Install the below packages
+  - laravelcollective/html
+  - laracasts/flash
+  
+- Run a migration to setup the below tables
+  - roles
+  - role_user
+  - permissions
+  - permission_role
+  
+- Create a new user 'Admin User (admin@domain.com)' with the password 'p455word'
+
+- Publish the Laravel Auth view files using 'php artisan make:auth'
+
+- Publish some additional view/template files
+
+- Replace the 'AuthServiceProvider' class with a new version
+
+- Replace the web routes file with a new version
+
+## Roles & Permissions
 
 1. Create some roles.
-
 2. Create some permissions.
-
 3. Give permission(s) to a role.
-
 4. Create user(s) with role.
-
 5. For checking authenticated user's role see below:
 
     ```php
     // Check role anywhere
-    if(Auth::check() && Auth::user()->hasRole('admin')) {
+    if (auth()->check() && auth()->user()->hasRole('admin')) {
         // Do admin stuff here
-    } else {
-        // Do nothing
     }
-
-    // Check role in route middleware
-    Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'roles'], 'roles' => 'admin'], function () {
-       Route::get('/', ['uses' => 'AdminController@index']);
-    });
     ```
 
 6. For checking permissions see below:
 
     ```php
-    if($user->can('permission-name')) {
+    if ($user->can('permission-name')) {
         // Do something
     }
     ```
