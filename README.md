@@ -1,4 +1,8 @@
 # Laravel Admin Starter
+
+[![Packagist](https://img.shields.io/packagist/v/jamesmills/laravel-admin.svg?style=flat-square)](https://packagist.org/packages/jamesmills/laravel-admin)
+[![Packagist](https://img.shields.io/packagist/l/jamesmills/laravel-admin.svg?style=flat-square)]()
+
 A very simple admin panel for managing users, roles & permissions.
 
 The premise for this package is to eradicate the duplicate work I do for every new Laravel project I setup.  
