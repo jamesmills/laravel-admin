@@ -1,7 +1,7 @@
 {
     "name": "jamesmills/laravel-admin",
     "license": "MIT",
-    "description": "Laravel Admin",
+    "description": "A very simple admin panel for managing users, roles & permissions.",
     "keywords": [
         "laravel",
         "admin",
