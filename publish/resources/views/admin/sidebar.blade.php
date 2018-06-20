@@ -7,7 +7,7 @@
         <div class="card-body">
             <ul class="nav flex-column" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a href="{{ route('admin.dashboard') }}">Home</a>
+                    <a href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
                 </li>
             </ul>
         </div>
