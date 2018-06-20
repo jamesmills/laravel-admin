@@ -15,17 +15,19 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $role = Role::create([
-            'name' => 'Admin',
-            'label' => 'admin',
-        ]);
+        if (!$user = User::whereEmail('admin@domain.com')->first()) {
+            $role = Role::create([
+                'name'  => 'Admin',
+                'label' => 'admin',
+            ]);
 
-        $user = User::create([
-            'name'     => 'Admin User',
-            'email'    => 'admin@domain.com',
-            'password' => \Hash::make('p455word'),
-        ]);
+            $user = User::create([
+                'name'     => 'Admin User',
+                'email'    => 'admin@domain.com',
+                'password' => \Hash::make('p455word'),
+            ]);
 
-        $user->assignRole('admin');
+            $user->assignRole($role->label);
+        }
     }
 }
