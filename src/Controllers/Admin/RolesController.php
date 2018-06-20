@@ -63,7 +63,9 @@ class RolesController extends Controller
             }
         }
 
-        return redirect('admin/roles')->with('flash_message', 'Role added!');
+        flash()->success('Role added!');
+
+        return redirect('admin/roles');
     }
 
     /**
@@ -118,7 +120,9 @@ class RolesController extends Controller
             }
         }
 
-        return redirect('admin/roles')->with('flash_message', 'Role updated!');
+        flash()->success('Role updated!');
+
+        return redirect('admin/roles');
     }
 
     /**
@@ -132,6 +136,8 @@ class RolesController extends Controller
     {
         Role::destroy($id);
 
-        return redirect('admin/roles')->with('flash_message', 'Role deleted!');
+        flash()->success('Role deleted!');
+
+        return redirect('admin/roles');
     }
 }

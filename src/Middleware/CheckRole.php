@@ -24,7 +24,7 @@ class CheckRole
             return $next($request);
         }
 
-        flash('You are not authorized to access this resource.')->error();
+        flash()->error('You are not authorized to access this resource.');
 
         return redirect()->route('home');
     }
